@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>خادم WhiteHub Services</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+</head>
+<body>
+    <header>
+        <img src="https://i.top4top.io/p_3284ske161.png" alt="شعار WhiteHub Services">
+        <h1>WhiteHub Services</h1>
+        <h2>برمجة بوتات الديسكورد والمواقع الإلكترونية 🌐</h2>
+    </header>
+    
+    <div class="description">
+        <p>
+            خادم <strong>WhiteHub Services</strong> يقدم خدمات متميزة في إنشاء البوتات والمواقع الإلكترونية مقابل كريديت بسيط. انضم لخادمنا على الديسكورد وتواصل معنا لتحصل على خدماتنا المميزة. 😊
+        </p>
+        <a href="https://discord.gg/Aead7K3CsT" class="btn-discord">✨ انضم لخادم الديسكورد ✨</a>
+    </div>
+
+    <form id="dataForm">
+        <label for="name">اسمك:</label>
+        <input type="text" id="name" placeholder="أدخل اسمك" required>
+
+        <label for="discord">يوزرك على الديسكورد:</label>
+        <input type="text" id="discord" placeholder="مثال: user#1234" required>
+
+        <label for="email">إيميلك:</label>
+        <input type="email" id="email" placeholder="أدخل بريدك الإلكتروني" required>
+
+        <label for="request">طلبك:</label>
+        <textarea id="request" rows="4" placeholder="اكتب طلبك هنا..." required></textarea>
+
+        <button type="button" onclick="sendEmail()">إرسال</button>
+    </form>
+
+    <script>
+        // تهيئة EmailJS
+        (function() {
+            emailjs.init("YOUR_PUBLIC_KEY"); // استبدل YOUR_PUBLIC_KEY بالمفتاح العام الخاص بك
+        })();
+
+        function sendEmail() {
+            const name = document.getElementById("name").value;
+            const discord = document.getElementById("discord").value;
+            const email = document.getElementById("email").value;
+            const request = document.getElementById("request").value;
+
+            if (!name || !discord || !email || !request) {
+                alert("يرجى ملء جميع الحقول!");
+                return;
+            }
+
+            const templateParams = {
+                user_name: name,
+                user_discord: discord,
+                user_email: email,
+                user_request: request
+            };
+
+            emailjs.send("YOUR_SERVICE_ID", "YOUR_TEMPLATE_ID", templateParams)
+                .then(function(response) {
+                    window.location.href = "success.html"; // الانتقال إلى صفحة التأكيد
+                }, function(error) {
+                    alert("حدث خطأ أثناء الإرسال. يرجى المحاولة لاحقًا.");
+                    console.log("FAILED...", error);
+                });
+        }
+    </script>
+</body>
+</html>
